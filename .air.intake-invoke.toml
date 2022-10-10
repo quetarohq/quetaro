@@ -1,0 +1,5 @@
+[build]
+cmd = "go build -o ./tmp/intake-invoke ./cmd/intake-invoke"
+bin = "tmp/intake-invoke"
+full_bin = "./tmp/intake-invoke"
+exclude_dir = ["_etc"]

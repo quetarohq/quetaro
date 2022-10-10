@@ -1,0 +1,138 @@
+services:
+  intake-pull:
+    image: cosmtrek/air
+    command: -c .air.intake-pull.toml
+    working_dir: /app
+    env_file: .docker-compose.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+    depends_on:
+      db:
+        condition: service_healthy
+      localstack:
+        condition: service_started
+  intake-invoke:
+    image: cosmtrek/air
+    command: -c .air.intake-invoke.toml
+    working_dir: /app
+    env_file: .docker-compose.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+    depends_on:
+      db:
+        condition: service_healthy
+      localstack:
+        condition: service_started
+  outlet-success:
+    image: cosmtrek/air
+    command: -c .air.outlet-success.toml
+    working_dir: /app
+    env_file: .docker-compose.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+    depends_on:
+      db:
+        condition: service_healthy
+      localstack:
+        condition: service_started
+  outlet-failure:
+    image: cosmtrek/air
+    command: -c .air.outlet-failure.toml
+    working_dir: /app
+    env_file: .docker-compose.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+    depends_on:
+      db:
+        condition: service_healthy
+      localstack:
+        condition: service_started
+  db:
+    image: postgres:12
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 1s
+      retries: 10
+  pgweb:
+    image: sosedoff/pgweb
+    command:
+      [
+        "bash",
+        "-c",
+        "pgweb --bind=0.0.0.0 --listen=8081 --ssl=disable --url=postgres://qtr@db/qtr > /dev/null",
+      ]
+    ports:
+      - "8081:8081"
+    depends_on:
+      db:
+        condition: service_healthy
+  psql:
+    image: postgres:12
+    entrypoint: /bin/bash -c
+    working_dir: /db
+    environment:
+      - PGHOST=db
+      - PGPORT=5432
+    volumes:
+      - ./_etc/db:/db:delegated
+    profiles:
+      - psql
+  localstack:
+    image: localstack/localstack:latest
+    entrypoint:
+      [
+        "bash",
+        "-c",
+        "docker-entrypoint.sh | grep -E --line-buffered -v 'AWS (logs.FilterLogEvents|sqs.ReceiveMessage)'",
+      ]
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=iam,lambda,logs,sqs
+      - LAMBDA_EXECUTOR=local
+  lambda-tailf:
+    image: lucagrulla/cw:4.1.1
+    command: tail --endpoint http://localstack:4566 -f /aws/lambda/qtr-job
+    env_file: .docker-compose.env
+    depends_on:
+      localstack:
+        condition: service_started
+  terraform:
+    image: hashicorp/terraform
+    working_dir: /lambda
+    environment:
+      - TF_VAR_localstack_host=localstack
+    volumes:
+      - ./_etc/lambda:/lambda:delegated
+    depends_on:
+      localstack:
+        condition: service_started
+    profiles:
+      - terraform
+  awscli:
+    image: amazon/aws-cli
+    env_file: .docker-compose.env
+    depends_on:
+      localstack:
+        condition: service_started
+    profiles:
+      - awscli
+volumes:
+  gomod:
+  gocache:
+  db:

@@ -1,0 +1,48 @@
+name: test
+on:
+  pull_request:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        ports:
+          - 15432:5432
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      localstack:
+        image: localstack/localstack
+        ports:
+          - 4566:4566
+        env:
+          SERVICES: iam,lambda,logs,sqs
+          LAMBDA_EXECUTOR: local
+        options: >-
+          --health-cmd "curl -f localhost:4566/health | grep -q initialized"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ">=1.19.3"
+      - uses: hashicorp/setup-terraform@v2
+      - uses: golangci/golangci-lint-action@v3
+      - run: make
+      - run: terraform init && terraform apply -auto-approve
+        working-directory: _etc/lambda
+      - run: ./_etc/db/setup.sh
+        env:
+          PGDATABASE: qtr_test
+      - run: make test
+        env:
+          TEST_QTR_DATABASE_DSN: postgres://qtr_test@localhost:15432
+          TEST_AWS_ENDPOINT_URL: http://localhost:4566

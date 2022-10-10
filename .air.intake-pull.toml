@@ -1,0 +1,5 @@
+[build]
+cmd = "go build -o ./tmp/intake-pull ./cmd/intake-pull"
+bin = "tmp/intake-pull"
+full_bin = "./tmp/intake-pull"
+exclude_dir = ["_etc"]

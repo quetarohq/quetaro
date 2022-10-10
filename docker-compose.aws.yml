@@ -1,0 +1,76 @@
+services:
+  intake-pull:
+    image: cosmtrek/air
+    command: -c .air.intake-pull.toml
+    working_dir: /app
+    env_file: .docker-compose.aws.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+      - ~/.aws/:/root/.aws:ro
+    depends_on:
+      db:
+        condition: service_healthy
+  intake-invoke:
+    image: cosmtrek/air
+    command: -c .air.intake-invoke.toml
+    working_dir: /app
+    env_file: .docker-compose.aws.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+      - ~/.aws/:/root/.aws:ro
+    depends_on:
+      db:
+        condition: service_healthy
+  outlet-success:
+    image: cosmtrek/air
+    command: -c .air.outlet-success.toml
+    working_dir: /app
+    env_file: .docker-compose.aws.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+      - ~/.aws/:/root/.aws:ro
+    depends_on:
+      db:
+        condition: service_healthy
+  outlet-failure:
+    image: cosmtrek/air
+    command: -c .air.outlet-failure.toml
+    working_dir: /app
+    env_file: .docker-compose.aws.env
+    volumes:
+      - ./:/app:delegated
+      - gomod:/go/pkg/mod
+      - gocache:/go/cache
+      - ~/.aws/:/root/.aws:ro
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:12
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 1s
+      timeout: 1s
+      retries: 10
+  lambda-tailf:
+    image: lucagrulla/cw:4.1.1
+    command: tail -f /aws/lambda/qtr-job
+    env_file: .docker-compose.aws.env
+    volumes:
+      - ~/.aws/:/root/.aws:ro
+volumes:
+  gomod:
+  gocache:
+  db:

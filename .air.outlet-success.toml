@@ -1,0 +1,5 @@
+[build]
+cmd = "go build -o ./tmp/outlet-success ./cmd/outlet-success"
+bin = "tmp/outlet-success"
+full_bin = "./tmp/outlet-success"
+exclude_dir = ["_etc"]
