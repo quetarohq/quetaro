@@ -11,7 +11,6 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
       - darwin
   - id: intake-pull
     binary: quetaro-intake-pull
@@ -22,7 +21,6 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
       - darwin
   - id: outlet-failure
     binary: quetaro-outlet-failure
@@ -33,7 +31,6 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
       - darwin
   - id: outlet-success
     binary: quetaro-outlet-success
@@ -44,7 +41,6 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
       - darwin
 checksum:
   name_template: "checksums.txt"
