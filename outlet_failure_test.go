@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/quetarohq/quetaro"
+	"github.com/quetarohq/quetaro/internal/testutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/winebarrel/quetaro"
-	"github.com/winebarrel/quetaro/internal/testutil"
 )
 
 func Test_OutletFailure_Start(t *testing.T) {

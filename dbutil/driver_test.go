@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
+	"github.com/quetarohq/quetaro/dbutil"
+	"github.com/quetarohq/quetaro/internal/testutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/winebarrel/quetaro/dbutil"
-	"github.com/winebarrel/quetaro/internal/testutil"
 )
 
 func Test_Connect(t *testing.T) {

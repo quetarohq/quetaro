@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/quetarohq/quetaro/internal/testutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/winebarrel/quetaro/internal/testutil"
 )
 
 func Test_OutletFailureAgent_run(t *testing.T) {

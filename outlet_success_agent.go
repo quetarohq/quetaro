@@ -9,10 +9,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
 	"github.com/jackc/pgx/v5"
 	"github.com/pkg/errors"
+	"github.com/quetarohq/quetaro/awsutil"
+	"github.com/quetarohq/quetaro/ctxutil"
+	"github.com/quetarohq/quetaro/sqsmsg"
 	"github.com/rs/zerolog/log"
-	"github.com/winebarrel/quetaro/awsutil"
-	"github.com/winebarrel/quetaro/ctxutil"
-	"github.com/winebarrel/quetaro/sqsmsg"
 )
 
 type OutletSuccessAgent struct {

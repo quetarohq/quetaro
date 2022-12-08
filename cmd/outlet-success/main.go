@@ -6,15 +6,15 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/quetarohq/quetaro"
 	"github.com/rs/zerolog"
-	"github.com/winebarrel/qtr"
 )
 
 func main() {
 	logger := zerolog.New(os.Stdout).With().Timestamp().Str("cmd", "outlet-success").Logger()
 	ctx := logger.WithContext(context.Background())
 	flags := parseFlags()
-	outletSuccess, err := qtr.NewOutletSuccess(flags.OutletSuccessOpts)
+	outletSuccess, err := quetaro.NewOutletSuccess(flags.OutletSuccessOpts)
 
 	if err != nil {
 		logger.Fatal().Err(err).Object("flags", flags).

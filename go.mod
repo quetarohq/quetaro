@@ -1,4 +1,4 @@
-module github.com/winebarrel/quetaro
+module github.com/quetarohq/quetaro
 
 go 1.19
 
@@ -9,7 +9,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.10
 	github.com/jackc/pgx/v5 v5.0.2
 	github.com/stretchr/testify v1.8.0
-	github.com/winebarrel/qtr v0.0.0-20221205081509-8ba4c1258a53
 	golang.org/x/sync v0.0.0-20220929204114-8fcdb60fdcc0
 )
 

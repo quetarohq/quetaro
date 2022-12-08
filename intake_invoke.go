@@ -7,9 +7,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/jackc/pgx/v5"
 	"github.com/pkg/errors"
+	"github.com/quetarohq/quetaro/awsutil"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"github.com/winebarrel/quetaro/awsutil"
 	"golang.org/x/sync/errgroup"
 )
 

@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/quetarohq/quetaro/cliutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/winebarrel/quetaro/cliutil"
 )
 
 func Test_GetIntEnv(t *testing.T) {

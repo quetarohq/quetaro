@@ -7,9 +7,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
+	"github.com/quetarohq/quetaro/internal/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/valyala/fastjson"
-	"github.com/winebarrel/quetaro/internal/testutil"
 )
 
 func Test_IntakeInvokeAgent_run_Success(t *testing.T) {

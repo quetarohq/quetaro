@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/winebarrel/qtr"
-	"github.com/winebarrel/quetaro/cliutil"
+	"github.com/quetarohq/quetaro"
+	"github.com/quetarohq/quetaro/cliutil"
 )
 
 var (
@@ -17,7 +17,7 @@ var (
 )
 
 type Flags struct {
-	*qtr.OutletSuccessOpts
+	*quetaro.OutletSuccessOpts
 }
 
 func init() {
@@ -33,7 +33,7 @@ func init() {
 
 func parseFlags() *Flags {
 	flags := &Flags{
-		OutletSuccessOpts: &qtr.OutletSuccessOpts{},
+		OutletSuccessOpts: &quetaro.OutletSuccessOpts{},
 	}
 
 	var dsn string

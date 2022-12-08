@@ -8,9 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
+	"github.com/quetarohq/quetaro/awsutil"
+	"github.com/quetarohq/quetaro/internal/testutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/winebarrel/quetaro/awsutil"
-	"github.com/winebarrel/quetaro/internal/testutil"
 )
 
 func TestReceiveMessage(t *testing.T) {

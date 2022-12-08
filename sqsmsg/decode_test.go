@@ -3,8 +3,8 @@ package sqsmsg_test
 import (
 	"testing"
 
+	"github.com/quetarohq/quetaro/sqsmsg"
 	"github.com/stretchr/testify/assert"
-	"github.com/winebarrel/quetaro/sqsmsg"
 )
 
 func Test_DecodeId(t *testing.T) {

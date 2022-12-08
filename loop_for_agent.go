@@ -6,8 +6,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/pkg/errors"
+	"github.com/quetarohq/quetaro/dbutil"
 	"github.com/rs/zerolog/log"
-	"github.com/winebarrel/quetaro/dbutil"
 )
 
 func loopForAgent(ctx context.Context, connCfg *pgx.ConnConfig, interval time.Duration, errInterval time.Duration, proc func(context.Context, *pgx.Conn) error) error {

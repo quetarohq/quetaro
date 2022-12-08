@@ -7,8 +7,8 @@ import (
 	"syscall"
 
 	"github.com/pkg/errors"
+	"github.com/quetarohq/quetaro"
 	"github.com/rs/zerolog"
-	"github.com/winebarrel/qtr"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 	ctx := logger.WithContext(context.Background())
 
 	flags := parseFlags()
-	intakeInvoke, err := qtr.NewIntakeInvoke(flags.IntakeInvokeOpts)
+	intakeInvoke, err := quetaro.NewIntakeInvoke(flags.IntakeInvokeOpts)
 
 	if err != nil {
 		logger.Fatal().Err(err).Object("flags", flags).
@@ -29,7 +29,7 @@ func main() {
 	err = intakeInvoke.Start(ctx)
 
 	if err != nil {
-		var ewj *qtr.ErrWithJob
+		var ewj *quetaro.ErrWithJob
 
 		if errors.As(err, &ewj) {
 			logger = logger.With().Str("id", ewj.Id).Str("function_name", ewj.Name).Logger()
