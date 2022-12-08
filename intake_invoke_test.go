@@ -26,10 +26,8 @@ func Test_IntakeInvoke_Start(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	go func() {
-		select {
-		case <-time.After(1 * time.Second):
-			cancel()
-		}
+		time.Sleep(1 * time.Second)
+		cancel()
 	}()
 
 	err := intakeInvoke.Start(ctx)
