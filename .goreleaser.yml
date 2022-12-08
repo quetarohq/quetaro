@@ -2,7 +2,9 @@ before:
   hooks:
     - go mod tidy
 builds:
-  - main: ./cmd/intake-invoke
+  - id: intake-invoke
+    binary: quetaro-intake-invoke
+    main: ./cmd/intake-invoke
     ldflags:
       - -X main.version={{.Version}}
     env:
@@ -11,7 +13,9 @@ builds:
       - linux
       - windows
       - darwin
-  - main: ./cmd/intake-pull
+  - id: intake-pull
+    binary: quetaro-intake-pull
+    main: ./cmd/intake-pull
     ldflags:
       - -X main.version={{.Version}}
     env:
@@ -20,7 +24,9 @@ builds:
       - linux
       - windows
       - darwin
-  - main: ./cmd/outlet-failure
+  - id: outlet-failure
+    binary: quetaro-outlet-failure
+    main: ./cmd/outlet-failure
     ldflags:
       - -X main.version={{.Version}}
     env:
@@ -29,7 +35,9 @@ builds:
       - linux
       - windows
       - darwin
-  - main: ./cmd/outlet-success
+  - id: outlet-success
+    binary: quetaro-outlet-success
+    main: ./cmd/outlet-success
     ldflags:
       - -X main.version={{.Version}}
     env:
