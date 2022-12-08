@@ -2,6 +2,8 @@
 
 quetaro-outlet-failure is a daemon that receives the results of failed Lambda executions from SQS($QTR_OUTLET_FAILURE_QUEUE) and updates the DB.
 
+![image](https://user-images.githubusercontent.com/117768/206354240-0f0ffdeb-b743-45ac-bbaa-a8e24ecea110.png)
+
 ## Usage
 
 ```
