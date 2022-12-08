@@ -6,7 +6,7 @@ Quetaro is a job queue system using SQS, Lambda and PostgreSQL.
 
 ## System Architecture
 
-![fig](https://user-images.githubusercontent.com/117768/205538100-0b8ea137-acf6-4aad-b070-169ffaf255ed.png)
+![fig](https://user-images.githubusercontent.com/117768/206375134-d25af7f9-2d6a-494a-80b7-5ab7350e9c31.png)
 
 ## Getting Started for local
 
