@@ -53,6 +53,7 @@ func (agent *IntakeInvokeAgent) invoke(ctx context.Context, conn *pgx.Conn) erro
 		var msgId, funcName, payload string
 		sql, args := sq.Select("id", "function_name", "payload").From("jobs").
 			Where(sq.And{
+				sq.Eq{"queue_name": agent.QueueName},
 				sq.Or{
 					sq.Eq{"status": JobStatusPending},
 					sq.Eq{"status": JobStatusFailure},

@@ -301,3 +301,58 @@ insert into jobs (
 	failureMsgs := testutil.ReceiveMessages(t, res.SQS, "qtr-outlet-failure-test")
 	assert.Len(failureMsgs, 0)
 }
+
+func Test_IntakeInvokeAgent_run_SkipOtherQueue(t *testing.T) {
+	res := testutil.SetupAgent(t)
+	defer res.Cleanup(t)
+	assert := assert.New(t)
+
+	//nolint:errcheck
+	res.Conn.Exec(context.Background(), `
+		insert into jobs (
+			id,
+			queue_name,
+			function_name,
+			payload,
+			status,
+			invoke_after,
+			error_count,
+			created_at,
+			updated_at
+		) values (
+			'013eb466-184c-43e6-b0c2-6667d5cf3b47',
+			'not-qtr-intake-test',
+			'qtr-job-test',
+			'{}',
+			'pending',
+			now(),
+			0,
+			now(),
+			now()
+		)
+`)
+
+	agent := &IntakeInvokeAgent{
+		IntakeInvoke: &IntakeInvoke{
+			IntakeInvokeOpts: &IntakeInvokeOpts{
+				QueueName:  "qtr-intake-test",
+				ConnConfig: res.ConnCfg,
+			},
+			lambda: testutil.NewLambdClient(t),
+		},
+	}
+
+	err := agent.run(&testutil.MockCtx{F: "loop_for_agent.go", N: 2})
+	assert.NoError(err)
+
+	rows := testutil.Query(t, res.Conn, "select * from jobs where id = '013eb466-184c-43e6-b0c2-6667d5cf3b47'")
+	assert.Equal(1, len(rows))
+	r := rows[0]
+	assert.Equal("pending", r["status"])
+
+	successMsgs := testutil.ReceiveMessages(t, res.SQS, "qtr-outlet-success-test")
+	assert.Len(successMsgs, 0)
+
+	failureMsgs := testutil.ReceiveMessages(t, res.SQS, "qtr-outlet-failure-test")
+	assert.Len(failureMsgs, 0)
+}
