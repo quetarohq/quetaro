@@ -2,6 +2,8 @@
 
 quetaro-intake-pull is a daemon that receives messages from SQS($QTR_INTAKE_QUEUE) and enqueues them to DB.
 
+![image](https://user-images.githubusercontent.com/117768/206353932-09fc27fb-2f08-4f29-af53-17aeb3747f4a.png)
+
 ## Usage
 
 ```
