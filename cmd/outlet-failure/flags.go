@@ -37,7 +37,7 @@ func parseFlags() *Flags {
 	}
 
 	var dsn string
-	flag.StringVar(&flags.OutletFailureOpts.QueueName, "queue", os.Getenv("QTR_OUTLET_FAILURE_QUEUE"), "outlet-failure queue name. use $QTR_OUTLET_SUCCESS_QUEUE env")
+	flag.StringVar(&flags.OutletFailureOpts.QueueName, "queue", os.Getenv("QTR_OUTLET_FAILURE_QUEUE"), "outlet-failure queue name. use $QTR_OUTLET_FAILURE_QUEUE env")
 	flag.StringVar(&dsn, "dsn", os.Getenv("QTR_DATABASE_DSN"), "database DSN. use $QTR_DATABASE_DSN env (e.g. 'postgres://username:password@localhost:5432')")
 	flag.IntVar(&flags.NAgents, "nagents", cliutil.GetIntEnv("QTR_OUTLET_FAILURE_NAGENTS", 1), "number of agents. use $QTR_OUTLET_FAILURE_NAGENTS env")
 	flag.DurationVar(&flags.Interval, "interval", cliutil.GetDurEnv("QTR_OUTLET_FAILURE_INTERVAL", 1*time.Second), "poll interval. use $QTR_OUTLET_FAILURE_INTERVAL env")
