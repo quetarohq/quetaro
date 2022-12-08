@@ -2,6 +2,8 @@
 
 quetaro-outlet-success is a daemon that receives the results of a successful Lambda execution from SQS($QTR_OUTLET_SUCCESS_QUEUE) and updates the DB.
 
+![image](https://user-images.githubusercontent.com/117768/206354319-8071a1b2-8f53-48db-8caf-0699c6369a8d.png)
+
 ## Usage
 
 ```
