@@ -51,7 +51,7 @@ Open http://localhost:8081/
 ### Create AWS resources
 
 ```sh
-$ cd _etc/lambda/
+$ cd _etc/terraform/
 $ terraform workspace new aws
 $ terraform init
 $ terraform apply

@@ -114,11 +114,11 @@ services:
         condition: service_started
   terraform:
     image: hashicorp/terraform
-    working_dir: /lambda
+    working_dir: /terraform
     environment:
       - TF_VAR_localstack_host=localstack
     volumes:
-      - ./_etc/lambda:/lambda:delegated
+      - ./_etc/terraform:/terraform:delegated
     depends_on:
       localstack:
         condition: service_started
