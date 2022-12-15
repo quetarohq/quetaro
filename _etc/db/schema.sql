@@ -24,4 +24,4 @@ create table jobs (
   updated_at timestamptz not null
 );
 
-create index if not exists jobs_queue_name_status_invoke_after_idx on jobs (queue_name, status, invoke_after);
+create index if not exists jobs_dequeue_idx on jobs (queue_name, status, invoke_after, updated_at);
