@@ -52,16 +52,18 @@ func (agent *IntakeInvokeAgent) invoke(ctx context.Context, conn *pgx.Conn) erro
 	err := pgx.BeginFunc(ctx, conn, func(tx pgx.Tx) error {
 		var msgId, funcName, payload string
 		sql, args := sq.Select("id", "function_name", "payload").From("jobs").
-			Where(sq.And{
-				sq.Eq{"queue_name": agent.QueueName},
-				sq.Or{
-					sq.Eq{"status": JobStatusPending},
-					sq.Eq{"status": JobStatusFailure},
+			Where(
+				sq.And{
+					sq.Eq{"queue_name": agent.QueueName},
+					sq.Or{
+						sq.Eq{"status": JobStatusPending},
+						sq.Eq{"status": JobStatusFailure},
+					},
+					sq.LtOrEq{
+						"invoke_after": time.Now(),
+					},
 				},
-				sq.LtOrEq{
-					"invoke_after": time.Now(),
-				},
-			}).OrderBy("invoke_after", "updated_at").Limit(1).
+			).OrderBy("invoke_after", "updated_at").Limit(1).
 			Suffix("for update skip locked").MustSql()
 		err := tx.QueryRow(ctx, sql, args...).Scan(&msgId, &funcName, &payload)
 
