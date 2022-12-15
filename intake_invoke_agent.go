@@ -61,8 +61,7 @@ func (agent *IntakeInvokeAgent) invoke(ctx context.Context, conn *pgx.Conn) erro
 				sq.LtOrEq{
 					"invoke_after": time.Now(),
 				},
-			},
-			).OrderBy("invoke_after", "updated_at").Limit(1).
+			}).OrderBy("invoke_after", "updated_at").Limit(1).
 			Suffix("for update skip locked").MustSql()
 		err := tx.QueryRow(ctx, sql, args...).Scan(&msgId, &funcName, &payload)
 
