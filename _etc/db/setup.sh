@@ -7,11 +7,11 @@ SCRIPT_DIR=$(readlink -f $(dirname $0))
 export PGHOST PGPORT PGDATABASE
 
 export PGUSER=postgres
-createdb ${PGDATABASE}
-createuser -s ${PGDATABASE}
+createdb $PGDATABASE
+createuser -s $PGDATABASE
 
-export PGUSER=${PGDATABASE}
-psql -c 'create schema qtr authorization qtr'
+export PGUSER=$PGDATABASE
+psql -c "create schema qtr authorization $PGUSER"
 psql -c 'alter role qtr set search_path = "$user"'
 psql -c 'create extension pgcrypto'
 psql -f $SCRIPT_DIR/schema.sql
