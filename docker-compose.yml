@@ -93,7 +93,7 @@ services:
     profiles:
       - psql
   localstack:
-    image: localstack/localstack:latest
+    image: localstack/localstack
     entrypoint:
       [
         "bash",

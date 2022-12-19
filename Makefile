@@ -26,7 +26,7 @@ clean:
 
 .PHONY: tf-init
 tf-init:
-	docker-compose run terraform init
+	docker-compose run terraform init -upgrade
 
 .PHONY: tf-apply
 tf-apply:
