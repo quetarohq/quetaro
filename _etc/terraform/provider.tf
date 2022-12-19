@@ -3,6 +3,15 @@ variable "localstack_host" {
   default = "localhost"
 }
 
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.46.0"
+    }
+  }
+}
+
 provider "aws" {
   region                      = terraform.workspace == "aws" ? null : "us-east-1"
   access_key                  = terraform.workspace == "aws" ? null : "mock_access_key"
