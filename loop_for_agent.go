@@ -18,7 +18,11 @@ func loopForAgent(ctx context.Context, connCfg *pgx.ConnConfig, interval time.Du
 		return errors.Wrap(err, "failed to connect DB")
 	}
 
-	defer func() { conn.Close(ctx) }()
+	defer func() {
+		if !conn.IsClosed() {
+			conn.Close(ctx)
+		}
+	}()
 
 LOOP:
 	for {
@@ -41,7 +45,10 @@ LOOP:
 				break LOOP
 			}
 
-			conn.Close(ctx)
+			if !conn.IsClosed() {
+				conn.Close(ctx)
+			}
+
 			conn, err = dbutil.Connect(ctx, connCfg)
 
 			if err != nil {
