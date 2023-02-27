@@ -3,7 +3,7 @@ module github.com/quetarohq/quetaro
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.17.4
+	github.com/aws/aws-sdk-go-v2 v1.17.5
 	github.com/aws/aws-sdk-go-v2/config v1.18.13
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.2
