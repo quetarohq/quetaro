@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/aws/aws-sdk-go-v2 v1.17.5
 	github.com/aws/aws-sdk-go-v2/config v1.18.13
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.29.2
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.29.4
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.4
 	github.com/jackc/pgx/v5 v5.3.0
 	github.com/stretchr/testify v1.8.2
