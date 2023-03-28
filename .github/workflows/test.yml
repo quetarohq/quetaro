@@ -23,6 +23,7 @@ jobs:
           - 4566:4566
         env:
           SERVICES: iam,lambda,logs,sqs
+          PROVIDER_OVERRIDE_LAMBDA: legacy # TODO:
           LAMBDA_EXECUTOR: local
         options: >-
           --health-cmd "curl -f localhost:4566/_localstack/health | grep -q available"
