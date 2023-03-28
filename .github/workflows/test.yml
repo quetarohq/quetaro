@@ -25,7 +25,7 @@ jobs:
           SERVICES: iam,lambda,logs,sqs
           LAMBDA_EXECUTOR: local
         options: >-
-          --health-cmd "curl -f localhost:4566/health | grep -q initialized"
+          --health-cmd "curl -f localhost:4566/_localstack/health | grep -q available"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
