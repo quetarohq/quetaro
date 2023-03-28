@@ -3,7 +3,7 @@ services:
     image: cosmtrek/air
     command: -c .air.intake-pull.toml
     working_dir: /app
-    env_file: .docker-compose.aws.env
+    env_file: .compose.aws.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -16,7 +16,7 @@ services:
     image: cosmtrek/air
     command: -c .air.intake-invoke.toml
     working_dir: /app
-    env_file: .docker-compose.aws.env
+    env_file: .compose.aws.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -29,7 +29,7 @@ services:
     image: cosmtrek/air
     command: -c .air.outlet-success.toml
     working_dir: /app
-    env_file: .docker-compose.aws.env
+    env_file: .compose.aws.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -42,7 +42,7 @@ services:
     image: cosmtrek/air
     command: -c .air.outlet-failure.toml
     working_dir: /app
-    env_file: .docker-compose.aws.env
+    env_file: .compose.aws.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -67,7 +67,7 @@ services:
   lambda-tailf:
     image: lucagrulla/cw:4.1.1
     command: tail -f /aws/lambda/qtr-job
-    env_file: .docker-compose.aws.env
+    env_file: .compose.aws.env
     volumes:
       - ~/.aws/:/root/.aws:ro
 volumes:
