@@ -19,7 +19,7 @@ func loopForAgent(ctx context.Context, connCfg *pgx.ConnConfig, interval time.Du
 	}
 
 	defer func() {
-		if !conn.IsClosed() {
+		if conn != nil && !conn.IsClosed() {
 			conn.Close(ctx)
 		}
 	}()
