@@ -3,7 +3,7 @@ services:
     image: cosmtrek/air
     command: -c .air.intake-pull.toml
     working_dir: /app
-    env_file: .docker-compose.env
+    env_file: .compose.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -17,7 +17,7 @@ services:
     image: cosmtrek/air
     command: -c .air.intake-invoke.toml
     working_dir: /app
-    env_file: .docker-compose.env
+    env_file: .compose.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -31,7 +31,7 @@ services:
     image: cosmtrek/air
     command: -c .air.outlet-success.toml
     working_dir: /app
-    env_file: .docker-compose.env
+    env_file: .compose.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -45,7 +45,7 @@ services:
     image: cosmtrek/air
     command: -c .air.outlet-failure.toml
     working_dir: /app
-    env_file: .docker-compose.env
+    env_file: .compose.env
     volumes:
       - ./:/app:delegated
       - gomod:/go/pkg/mod
@@ -109,7 +109,7 @@ services:
   lambda-tailf:
     image: lucagrulla/cw:4.1.1
     command: tail --endpoint http://localstack:4566 -f /aws/lambda/qtr-job
-    env_file: .docker-compose.env
+    env_file: .compose.env
     depends_on:
       localstack:
         condition: service_started
@@ -127,7 +127,7 @@ services:
       - terraform
   awscli:
     image: amazon/aws-cli
-    env_file: .docker-compose.env
+    env_file: .compose.env
     depends_on:
       localstack:
         condition: service_started

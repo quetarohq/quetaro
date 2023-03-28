@@ -15,7 +15,7 @@ cf. https://github.com/quetarohq/quetaro/tree/main/_etc/terraform
 ### Start docker-compose
 
 ```sh
-$ docker-compose up
+$ docker compose up
 ```
 
 ### Create AWS resources to LocalStack
@@ -64,7 +64,7 @@ $ terraform apply
 ### Start docker-compose for AWS
 
 ```sh
-$ docker-compose -f docker-compose.aws.yml up
+$ docker compose -f compose.aws.yml up
 ```
 
 ### Setup DB
@@ -83,7 +83,7 @@ $ make message-for-aws
 ## Run tests
 
 ```sh
-$ docker-compose up localstack db
+$ docker compose up localstack db
 ```
 
 ```sh
