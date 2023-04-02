@@ -16,7 +16,7 @@ import (
 var (
 	AwsRegion          = "us-east-1"
 	AwsEndpointUrl     = "http://localhost:4566"
-	SqsWaitTimeSeconds = 1
+	SqsWaitTimeSeconds = 2
 )
 
 func init() {

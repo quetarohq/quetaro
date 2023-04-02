@@ -23,13 +23,13 @@ jobs:
           - 4566:4566
         env:
           SERVICES: iam,lambda,logs,sqs
-          PROVIDER_OVERRIDE_LAMBDA: legacy # TODO:
-          LAMBDA_EXECUTOR: local
         options: >-
           --health-cmd "curl -f localhost:4566/_localstack/health | grep -q available"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
@@ -37,6 +37,8 @@ jobs:
           go-version: ">=1.19.4"
       - uses: hashicorp/setup-terraform@v2
       - uses: golangci/golangci-lint-action@v3
+        with:
+          args: -E misspell
       - run: make
       - run: terraform init && terraform apply -auto-approve
         working-directory: _etc/terraform
