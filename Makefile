@@ -43,7 +43,7 @@ psql:
 
 .PHONY: restart
 restart:
-	docker compose restart intake-invoke intake-pull outlet-failure outlet-success lambda-tailf pgweb
+	docker compose restart -t 0 intake-invoke intake-pull outlet-failure outlet-success lambda-tailf pgweb
 
 .PHONY: message
 message:

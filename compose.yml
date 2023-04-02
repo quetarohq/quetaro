@@ -104,8 +104,9 @@ services:
       - "4566:4566"
     environment:
       - SERVICES=iam,lambda,logs,sqs
-      - PROVIDER_OVERRIDE_LAMBDA=legacy # TODO:
-      - LAMBDA_EXECUTOR=local
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
   lambda-tailf:
     image: lucagrulla/cw:4.1.1
     command: tail --endpoint http://localstack:4566 -f /aws/lambda/qtr-job
