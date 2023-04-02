@@ -11,6 +11,5 @@ exports.handler = async (event) => {
   // do something
   const zen =
     "Zen: " + execSync("curl -sf https://api.github.com/zen").toString();
-  const line = "*".repeat(zen.length + 4);
-  console.log([line, `* ${zen} *`, line].join("\n"));
+  console.log(`********** ${zen} **********`);
 };
