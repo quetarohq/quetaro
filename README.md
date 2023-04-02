@@ -8,7 +8,7 @@ Quetaro is a job queue system using SQS, Lambda and PostgreSQL.
 
 cf. https://github.com/quetarohq/quetaro/tree/main/_etc/terraform
 
-![fig](https://user-images.githubusercontent.com/117768/206375134-d25af7f9-2d6a-494a-80b7-5ab7350e9c31.png)
+![](https://user-images.githubusercontent.com/117768/229342969-1c6e1ceb-ad93-4c49-807f-f854f238a94e.png)
 
 ## Getting Started for local
 
