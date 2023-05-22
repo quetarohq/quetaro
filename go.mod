@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.22.0
 	github.com/jackc/pgx/v5 v5.3.1
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.3
 	golang.org/x/sync v0.2.0
 )
 
