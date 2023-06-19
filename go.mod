@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.23.2
 	github.com/jackc/pgx/v5 v5.4.1
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/sync v0.2.0
+	golang.org/x/sync v0.3.0
 )
 
 require github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.10 // indirect
