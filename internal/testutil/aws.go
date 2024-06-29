@@ -115,5 +115,7 @@ func ReceiveMessages(t *testing.T, client *sqs.Client, queueName string) []types
 func NewLambdClient(t *testing.T) *lambda.Client {
 	t.Helper()
 	awsCfg := NewAwsConfig(t)
-	return lambda.NewFromConfig(awsCfg)
+	return lambda.NewFromConfig(awsCfg, func(o *lambda.Options) {
+		o.BaseEndpoint = &AwsEndpointUrl
+	})
 }
