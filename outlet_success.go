@@ -39,14 +39,18 @@ type OutletSuccess struct {
 }
 
 func NewOutletSuccess(opts *OutletSuccessOpts) (*OutletSuccess, error) {
-	cfg, err := awsutil.LoadDefaultConfig(opts.AWSRegion, opts.AWSEndpointUrl)
+	cfg, err := awsutil.LoadDefaultConfig(opts.AWSRegion)
 
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to load AWS config")
 	}
 
 	// SQS client is created by each agent.
-	client := sqs.NewFromConfig(cfg)
+	client := sqs.NewFromConfig(cfg, func(o *sqs.Options) {
+		if opts.AWSEndpointUrl != "" {
+			o.BaseEndpoint = &opts.AWSEndpointUrl
+		}
+	})
 
 	// get the queue URL outside the agent.
 	output, err := client.GetQueueUrl(context.Background(), &sqs.GetQueueUrlInput{

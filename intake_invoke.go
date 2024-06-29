@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/jackc/pgx/v5"
 	"github.com/pkg/errors"
@@ -36,7 +37,7 @@ type IntakeInvoke struct {
 }
 
 func NewIntakeInvoke(opts *IntakeInvokeOpts) (*IntakeInvoke, error) {
-	cfg, err := awsutil.LoadDefaultConfig(opts.AWSRegion, opts.AWSEndpointUrl)
+	cfg, err := awsutil.LoadDefaultConfig(opts.AWSRegion)
 
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to load AWS config")
@@ -44,7 +45,11 @@ func NewIntakeInvoke(opts *IntakeInvokeOpts) (*IntakeInvoke, error) {
 
 	intakeInvoke := &IntakeInvoke{
 		IntakeInvokeOpts: opts,
-		lambda:           lambda.NewFromConfig(cfg),
+		lambda: lambda.NewFromConfig(cfg, func(o *lambda.Options) {
+			if opts.AWSEndpointUrl != "" {
+				o.BaseEndpoint = aws.String(opts.AWSEndpointUrl)
+			}
+		}),
 	}
 
 	return intakeInvoke, nil

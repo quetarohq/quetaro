@@ -22,7 +22,11 @@ type OutletFailureAgent struct {
 }
 
 func newOutletFailureAgent(outletFailure *OutletFailure) *OutletFailureAgent {
-	sqsClient := sqs.NewFromConfig(outletFailure.AwsCfg)
+	sqsClient := sqs.NewFromConfig(outletFailure.AwsCfg, func(o *sqs.Options) {
+		if outletFailure.AWSEndpointUrl != "" {
+			o.BaseEndpoint = aws.String(outletFailure.AWSEndpointUrl)
+		}
+	})
 
 	agent := &OutletFailureAgent{
 		OutletFailure: outletFailure,

@@ -21,7 +21,11 @@ type OutletSuccessAgent struct {
 }
 
 func newOutletSuccessAgent(outletSuccess *OutletSuccess) *OutletSuccessAgent {
-	sqsClient := sqs.NewFromConfig(outletSuccess.AwsCfg)
+	sqsClient := sqs.NewFromConfig(outletSuccess.AwsCfg, func(o *sqs.Options) {
+		if outletSuccess.AWSEndpointUrl != "" {
+			o.BaseEndpoint = aws.String(outletSuccess.AWSEndpointUrl)
+		}
+	})
 
 	agent := &OutletSuccessAgent{
 		OutletSuccess: outletSuccess,
