@@ -36,7 +36,7 @@ type IntakeInvoke struct {
 }
 
 func NewIntakeInvoke(opts *IntakeInvokeOpts) (*IntakeInvoke, error) {
-	cfg, err := awsutil.LoadDefaultConfig(opts.AWSRegion, opts.AWSEndpointUrl)
+	cfg, err := awsutil.LoadDefaultConfig(opts.AWSRegion)
 
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to load AWS config")
@@ -44,7 +44,11 @@ func NewIntakeInvoke(opts *IntakeInvokeOpts) (*IntakeInvoke, error) {
 
 	intakeInvoke := &IntakeInvoke{
 		IntakeInvokeOpts: opts,
-		lambda:           lambda.NewFromConfig(cfg),
+		lambda: lambda.NewFromConfig(cfg, func(o *lambda.Options) {
+			if opts.AWSEndpointUrl != "" {
+				o.BaseEndpoint = &opts.AWSEndpointUrl
+			}
+		}),
 	}
 
 	return intakeInvoke, nil

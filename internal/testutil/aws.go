@@ -39,16 +39,6 @@ func NewAwsConfig(t *testing.T) aws.Config {
 	t.Helper()
 	optFns := []func(*config.LoadOptions) error{}
 	optFns = append(optFns, config.WithRegion(AwsRegion))
-
-	customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
-		return aws.Endpoint{
-			PartitionID:   "aws",
-			URL:           AwsEndpointUrl,
-			SigningRegion: region,
-		}, nil
-	})
-
-	optFns = append(optFns, config.WithEndpointResolverWithOptions(customResolver))
 	awsCfg, err := config.LoadDefaultConfig(context.Background(), optFns...)
 
 	if err != nil {
@@ -61,7 +51,9 @@ func NewAwsConfig(t *testing.T) aws.Config {
 func NewSQSClient(t *testing.T) *sqs.Client {
 	t.Helper()
 	awsCfg := NewAwsConfig(t)
-	return sqs.NewFromConfig(awsCfg)
+	return sqs.NewFromConfig(awsCfg, func(o *sqs.Options) {
+		o.BaseEndpoint = &AwsEndpointUrl
+	})
 }
 
 func SendMessage(t *testing.T, client *sqs.Client, queueName string, funcName string, body string) {
