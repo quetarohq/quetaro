@@ -27,7 +27,11 @@ type IntakePullAgent struct {
 }
 
 func newIntakePullAgent(intakePull *IntakePull) *IntakePullAgent {
-	sqsClient := sqs.NewFromConfig(intakePull.AwsCfg)
+	sqsClient := sqs.NewFromConfig(intakePull.AwsCfg, func(o *sqs.Options) {
+		if intakePull.AWSEndpointUrl != "" {
+			o.BaseEndpoint = aws.String(intakePull.AWSEndpointUrl)
+		}
+	})
 
 	agent := &IntakePullAgent{
 		IntakePull: intakePull,

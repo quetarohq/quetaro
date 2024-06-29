@@ -52,7 +52,7 @@ func NewSQSClient(t *testing.T) *sqs.Client {
 	t.Helper()
 	awsCfg := NewAwsConfig(t)
 	return sqs.NewFromConfig(awsCfg, func(o *sqs.Options) {
-		o.BaseEndpoint = &AwsEndpointUrl
+		o.BaseEndpoint = aws.String(AwsEndpointUrl)
 	})
 }
 
@@ -116,6 +116,6 @@ func NewLambdClient(t *testing.T) *lambda.Client {
 	t.Helper()
 	awsCfg := NewAwsConfig(t)
 	return lambda.NewFromConfig(awsCfg, func(o *lambda.Options) {
-		o.BaseEndpoint = &AwsEndpointUrl
+		o.BaseEndpoint = aws.String(AwsEndpointUrl)
 	})
 }

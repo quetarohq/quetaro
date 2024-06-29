@@ -48,7 +48,7 @@ func NewIntakePull(opts *IntakePullOpts) (*IntakePull, error) {
 	// SQS client is created by each agent.
 	client := sqs.NewFromConfig(cfg, func(o *sqs.Options) {
 		if opts.AWSEndpointUrl != "" {
-			o.BaseEndpoint = &opts.AWSEndpointUrl
+			o.BaseEndpoint = aws.String(opts.AWSEndpointUrl)
 		}
 	})
 

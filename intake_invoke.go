@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/jackc/pgx/v5"
 	"github.com/pkg/errors"
@@ -46,7 +47,7 @@ func NewIntakeInvoke(opts *IntakeInvokeOpts) (*IntakeInvoke, error) {
 		IntakeInvokeOpts: opts,
 		lambda: lambda.NewFromConfig(cfg, func(o *lambda.Options) {
 			if opts.AWSEndpointUrl != "" {
-				o.BaseEndpoint = &opts.AWSEndpointUrl
+				o.BaseEndpoint = aws.String(opts.AWSEndpointUrl)
 			}
 		}),
 	}
