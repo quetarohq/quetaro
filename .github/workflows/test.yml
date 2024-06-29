@@ -46,9 +46,10 @@ jobs:
       - run: ./_etc/db/setup.sh
         env:
           PGDATABASE: qtr_test
-      - uses: nick-fields/retry@v3
+      - name: make test
+        uses: nick-fields/retry@v3
         with:
-          timeout_seconds: 10
+          timeout_minutes: 10
           max_attempts: 3
           command: |
             export TEST_QTR_DATABASE_DSN=postgres://qtr_test@localhost:15432
