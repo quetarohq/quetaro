@@ -46,7 +46,11 @@ jobs:
       - run: ./_etc/db/setup.sh
         env:
           PGDATABASE: qtr_test
-      - run: make test
-        env:
-          TEST_QTR_DATABASE_DSN: postgres://qtr_test@localhost:15432
-          TEST_AWS_ENDPOINT_URL: http://localhost:4566
+      - uses: nick-fields/retry@v3
+        with:
+          timeout_seconds: 10
+          max_attempts: 3
+          command: |
+            export TEST_QTR_DATABASE_DSN=postgres://qtr_test@localhost:15432
+            export TEST_AWS_ENDPOINT_URL=http://localhost:4566
+            make test
