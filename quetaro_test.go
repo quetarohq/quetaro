@@ -14,5 +14,5 @@ func TestMain(m *testing.M) {
 		os.Setenv("AWS_SECRET_ACCESS_KEY", "mock_secret_key")
 	}
 
-	m.Run()
+	os.Exit(m.Run())
 }
