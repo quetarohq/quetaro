@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.27.33
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.58.3
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.34.8
-	github.com/jackc/pgx/v5 v5.7.0
+	github.com/jackc/pgx/v5 v5.7.1
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/sync v0.8.0
 )
@@ -37,7 +37,7 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/rs/zerolog v1.33.0
-	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/sys v0.25.0 // indirect
 )
 
 require (
@@ -54,6 +54,6 @@ require (
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/pkg/errors v0.9.1
-	golang.org/x/crypto v0.17.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/crypto v0.27.0 // indirect
+	golang.org/x/text v0.18.0 // indirect
 )
