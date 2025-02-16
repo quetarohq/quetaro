@@ -52,6 +52,6 @@ jobs:
           timeout_minutes: 10
           max_attempts: 3
           command: |
-            export TEST_QTR_DATABASE_DSN=postgres://qtr_test@localhost:15432
+            export TEST_QTR_DATABASE_DSN=postgres://qtr_test@localhost:15432?sslmode=disable
             export TEST_AWS_ENDPOINT_URL=http://localhost:4566
             make test

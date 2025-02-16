@@ -72,9 +72,11 @@ services:
     image: sosedoff/pgweb
     command:
       [
-        "bash",
-        "-c",
-        "pgweb --bind=0.0.0.0 --listen=8081 --ssl=disable --url=postgres://qtr@db/qtr > /dev/null",
+        "pgweb",
+        "--bind=0.0.0.0",
+        "--listen=8081",
+        "--ssl=disable",
+        "--url=postgres://qtr@db/qtr",
       ]
     ports:
       - "8081:8081"
