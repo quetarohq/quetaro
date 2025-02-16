@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	DatabaseDsn = "postgres://qtr_test@localhost:15432"
+	DatabaseDsn = "postgres://qtr_test@localhost:15432?sslmode=disable"
 )
 
 func init() {
