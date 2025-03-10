@@ -52,7 +52,7 @@ services:
       db:
         condition: service_healthy
   db:
-    image: postgres:12
+    image: postgres:17
     ports:
       - "15432:5432"
     environment:

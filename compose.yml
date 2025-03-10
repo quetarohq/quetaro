@@ -56,7 +56,7 @@ services:
       localstack:
         condition: service_started
   db:
-    image: postgres:12
+    image: postgres:17
     ports:
       - "15432:5432"
     environment:
@@ -84,7 +84,7 @@ services:
       db:
         condition: service_healthy
   psql:
-    image: postgres:12
+    image: postgres:17
     entrypoint: /bin/bash -c
     working_dir: /db
     environment:
