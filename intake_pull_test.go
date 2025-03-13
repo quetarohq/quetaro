@@ -28,7 +28,7 @@ func Test_IntakePull_Start(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	go func() {
-		time.Sleep(1 * time.Second)
+		time.Sleep(3 * time.Second)
 		cancel()
 	}()
 
