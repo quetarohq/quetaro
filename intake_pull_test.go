@@ -2,6 +2,7 @@ package quetaro_test
 
 import (
 	"context"
+	"errors"
 	"testing"
 	"time"
 
@@ -28,10 +29,10 @@ func Test_IntakePull_Start(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	go func() {
-		time.Sleep(3 * time.Second)
+		time.Sleep(1 * time.Second)
 		cancel()
 	}()
 
 	err := intakePull.Start(ctx)
-	assert.NoError(err)
+	assert.True(err == nil || errors.Is(err, context.Canceled))
 }

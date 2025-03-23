@@ -26,20 +26,20 @@ clean:
 
 .PHONY: tf-init
 tf-init:
-	docker compose run terraform init -upgrade
+	docker compose run --rm terraform init -upgrade
 
 .PHONY: tf-apply
 tf-apply:
-	docker compose run terraform apply -auto-approve
+	docker compose run --rm terraform apply -auto-approve
 
 .PHONY: db
 db:
-	docker compose run psql ./setup.sh
-	docker compose run -e PGDATABASE=qtr_test psql ./setup.sh
+	docker compose run --rm psql ./setup.sh
+	docker compose run --rm -e PGDATABASE=qtr_test psql ./setup.sh
 
 .PHONY: psql
 psql:
-	docker compose run psql 'psql -h db -U qtr'
+	docker compose run --rm psql 'psql -h db -U qtr'
 
 .PHONY: restart
 restart:
@@ -47,7 +47,7 @@ restart:
 
 .PHONY: message
 message:
-	docker compose run \
+	docker compose run --rm \
 	awscli sqs send-message --region us-east-1 --endpoint-url http://localstack:4566 \
 		--queue-url qtr-intake \
 		--message-attributes "FunctionName={StringValue=qtr-job,DataType=String}" \

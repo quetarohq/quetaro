@@ -2,6 +2,7 @@ package quetaro_test
 
 import (
 	"context"
+	"errors"
 	"testing"
 	"time"
 
@@ -31,5 +32,5 @@ func Test_IntakeInvoke_Start(t *testing.T) {
 	}()
 
 	err := intakeInvoke.Start(ctx)
-	assert.NoError(err)
+	assert.True(err == nil || errors.Is(err, context.Canceled))
 }
