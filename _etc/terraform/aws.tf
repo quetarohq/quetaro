@@ -40,16 +40,18 @@ data "aws_iam_policy_document" "qtr_job_logs" {
 resource "aws_iam_role" "qtr_job" {
   name_prefix        = "qtr-job-"
   assume_role_policy = data.aws_iam_policy_document.qtr_job_assume_role_policy.json
+}
 
-  inline_policy {
-    name   = "sqs"
-    policy = data.aws_iam_policy_document.qtr_job_sqs.json
-  }
+resource "aws_iam_role_policy" "qtr_job_sqs" {
+  role   = aws_iam_role.qtr_job.name
+  name   = "sqs"
+  policy = data.aws_iam_policy_document.qtr_job_sqs.json
+}
 
-  inline_policy {
-    name   = "logs"
-    policy = data.aws_iam_policy_document.qtr_job_logs.json
-  }
+resource "aws_iam_role_policy" "qtr_job_logs" {
+  role   = aws_iam_role.qtr_job.name
+  name   = "logs"
+  policy = data.aws_iam_policy_document.qtr_job_logs.json
 }
 
 ########################################################################

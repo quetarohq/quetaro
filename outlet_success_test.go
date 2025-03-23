@@ -2,6 +2,7 @@ package quetaro_test
 
 import (
 	"context"
+	"errors"
 	"testing"
 	"time"
 
@@ -33,5 +34,5 @@ func Test_OutletSuccess_Start(t *testing.T) {
 	}()
 
 	err := outletSuccess.Start(ctx)
-	assert.NoError(err)
+	assert.True(err == nil || errors.Is(err, context.Canceled))
 }

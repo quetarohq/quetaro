@@ -15,7 +15,7 @@ import (
 
 var (
 	AwsRegion          = "us-east-1"
-	AwsEndpointUrl     = "http://localhost:4566"
+	AwsEndpointUrl     = "http://127.0.0.1:4566"
 	SqsWaitTimeSeconds = 2
 )
 
