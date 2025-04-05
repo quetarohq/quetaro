@@ -47,7 +47,7 @@ func TestDeleteMessageBatch(t *testing.T) {
 	}
 
 	msgs := []types.Message{{MessageId: aws.String("ID")}}
-	err, failed := awsutil.DeleteMessages(context.Background(), mock, "queueUrl", msgs)
+	failed, err := awsutil.DeleteMessages(context.Background(), mock, "queueUrl", msgs)
 	assert.EqualError(err, "SQS DeleteMessageBatch error: DeleteMessageBatch error")
 	assert.True(called)
 	assert.Equal(1, len(failed))
