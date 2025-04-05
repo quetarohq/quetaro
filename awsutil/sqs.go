@@ -25,7 +25,7 @@ func ReceiveMessages(ctx context.Context, client SQSAPI, queueUrl string, maxRec
 	return output.Messages, nil
 }
 
-func DeleteMessages(ctx context.Context, client SQSAPI, queueUrl string, msgs []types.Message) (error, []types.BatchResultErrorEntry) {
+func DeleteMessages(ctx context.Context, client SQSAPI, queueUrl string, msgs []types.Message) ([]types.BatchResultErrorEntry, error) {
 	input := &sqs.DeleteMessageBatchInput{
 		QueueUrl: aws.String(queueUrl),
 		Entries:  make([]types.DeleteMessageBatchRequestEntry, 0, len(msgs)),
@@ -41,7 +41,7 @@ func DeleteMessages(ctx context.Context, client SQSAPI, queueUrl string, msgs []
 	resp, err := client.DeleteMessageBatch(ctx, input)
 
 	if err != nil {
-		return errors.Wrap(err, "SQS DeleteMessageBatch error"), resp.Failed
+		return resp.Failed, errors.Wrap(err, "SQS DeleteMessageBatch error")
 	}
 
 	return nil, nil

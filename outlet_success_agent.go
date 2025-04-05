@@ -116,7 +116,7 @@ func (agent *OutletSuccessAgent) pull(ctx context.Context, conn *pgx.Conn) error
 		}
 
 		if len(msgsToDel) > 0 {
-			err, failed := awsutil.DeleteMessages(ctx, agent.sqs, agent.QueueUrl, msgsToDel)
+			failed, err := awsutil.DeleteMessages(ctx, agent.sqs, agent.QueueUrl, msgsToDel)
 
 			if err != nil {
 				for _, e := range failed {

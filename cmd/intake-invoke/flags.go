@@ -37,7 +37,7 @@ func parseFlags() *Flags {
 	}
 
 	var dsn string
-	flag.StringVar(&flags.IntakeInvokeOpts.QueueName, "queue", os.Getenv("QTR_INTAKE_QUEUE"), "intake queue name. use $QTR_INTAKE_QUEUE env")
+	flag.StringVar(&flags.QueueName, "queue", os.Getenv("QTR_INTAKE_QUEUE"), "intake queue name. use $QTR_INTAKE_QUEUE env")
 	flag.StringVar(&dsn, "dsn", os.Getenv("QTR_DATABASE_DSN"), "database DSN. use $QTR_DATABASE_DSN env (e.g. 'postgres://username:password@localhost:5432')")
 	flag.IntVar(&flags.NAgents, "nagents", cliutil.GetIntEnv("QTR_INTAKE_INVOKE_NAGENTS", 1), "number of agents. use $QTR_INTAKE_INVOKE_NAGENTS env")
 	flag.DurationVar(&flags.Interval, "interval", cliutil.GetDurEnv("QTR_INTAKE_INVOKE_INTERVAL", 100*time.Millisecond), "poll interval. use $QTR_INTAKE_INVOKE_INTERVAL env")
@@ -51,7 +51,7 @@ func parseFlags() *Flags {
 		cliutil.PrintVersionAndExit(version)
 	}
 
-	if flags.IntakeInvokeOpts.QueueName == "" {
+	if flags.QueueName == "" {
 		cliutil.PrintErrorAndExit("'-queue' option is required")
 	}
 
