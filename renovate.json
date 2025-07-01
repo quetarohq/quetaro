@@ -8,6 +8,17 @@
     "gomodTidy"
   ],
   "vulnerabilityAlerts": {
-    "enabled": "true"
-  }
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "aws"
+      ],
+      "matchManagers": [
+        "terraform"
+      ],
+      "enabled": false
+    }
+  ]
 }
