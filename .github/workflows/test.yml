@@ -37,7 +37,7 @@ jobs:
           - "/var/run/docker.sock:/var/run/docker.sock"
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
           cache: false
