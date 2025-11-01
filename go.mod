@@ -7,7 +7,7 @@ toolchain go1.25.3
 require (
 	github.com/aws/aws-sdk-go-v2 v1.39.5
 	github.com/aws/aws-sdk-go-v2/config v1.31.16
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.80.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.81.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.12
 	github.com/jackc/pgx/v5 v5.7.6
 	github.com/stretchr/testify v1.11.1
