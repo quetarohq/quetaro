@@ -36,7 +36,7 @@ jobs:
         volumes:
           - "/var/run/docker.sock:/var/run/docker.sock"
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
