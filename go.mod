@@ -2,7 +2,7 @@ module github.com/quetarohq/quetaro
 
 go 1.24.0
 
-toolchain go1.25.7
+toolchain go1.26.0
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.1
