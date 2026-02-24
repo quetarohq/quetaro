@@ -41,7 +41,7 @@ jobs:
         with:
           go-version-file: go.mod
           cache: false
-      - uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v4
       - uses: golangci/golangci-lint-action@v9
       - run: make
       - run: terraform init && terraform apply -auto-approve
