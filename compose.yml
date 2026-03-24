@@ -95,7 +95,7 @@ services:
     profiles:
       - psql
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:community-archive
     entrypoint:
       [
         "bash",
