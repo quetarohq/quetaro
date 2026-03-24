@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.4
 	github.com/aws/aws-sdk-go-v2/config v1.32.12
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.88.3
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.88.4
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.24
 	github.com/jackc/pgx/v5 v5.9.1
 	github.com/stretchr/testify v1.11.1
@@ -13,7 +13,7 @@ require (
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.7 // indirect
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.8 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.7 // indirect
 	github.com/aws/aws-sdk-go-v2/service/signin v1.0.8 // indirect
 )
