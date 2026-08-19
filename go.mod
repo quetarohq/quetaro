@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.101.4
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.46.6
 	github.com/jackc/pgx/v5 v5.10.0
-	github.com/stretchr/testify v1.12.0
+	github.com/stretchr/testify v1.12.1
 	golang.org/x/sync v0.22.0
 )
 
@@ -17,14 +17,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/v4a v1.4.38 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.17 // indirect
 	github.com/aws/aws-sdk-go-v2/service/signin v1.5.6 // indirect
+	go.yaml.in/yaml/v3 v3.0.5 // indirect
 )
 
-require (
-	github.com/kr/text v0.2.0 // indirect
-	github.com/rogpeppe/go-internal v1.9.0 // indirect
-	github.com/valyala/fastjson v1.6.10
-	gopkg.in/yaml.v3 v3.0.1 // indirect
-)
+require github.com/valyala/fastjson v1.6.10
 
 require (
 	github.com/Masterminds/squirrel v1.5.4
