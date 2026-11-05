@@ -5,7 +5,7 @@ go 1.26.0
 require (
 	github.com/aws/aws-sdk-go-v2 v1.47.7
 	github.com/aws/aws-sdk-go-v2/config v1.33.15
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.114.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.114.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.52.10
 	github.com/jackc/pgx/v5 v5.12.0
 	github.com/stretchr/testify v1.12.1
